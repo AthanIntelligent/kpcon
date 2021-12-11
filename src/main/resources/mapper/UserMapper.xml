@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aiden.kpcon.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.aiden.kpcon.model.User">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="wx_open_id" jdbcType="VARCHAR" property="wxOpenId" />
+    <result column="wx_union_id" jdbcType="VARCHAR" property="wxUnionId" />
+    <result column="wx_nickname" jdbcType="VARCHAR" property="wxNickname" />
+    <result column="wx_headimg_url" jdbcType="VARCHAR" property="wxHeadimgUrl" />
+    <result column="wx_gender" jdbcType="INTEGER" property="wxGender" />
+    <result column="wx_country" jdbcType="VARCHAR" property="wxCountry" />
+    <result column="wx_province" jdbcType="VARCHAR" property="wxProvince" />
+    <result column="wx_city" jdbcType="VARCHAR" property="wxCity" />
+    <result column="wx_language" jdbcType="VARCHAR" property="wxLanguage" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
+    <result column="identity_number" jdbcType="VARCHAR" property="identityNumber" />
+    <result column="identity_name" jdbcType="VARCHAR" property="identityName" />
+    <result column="login_ip" jdbcType="VARCHAR" property="loginIp" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="area_code" jdbcType="VARCHAR" property="areaCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, create_time, update_time, wx_open_id, wx_union_id, wx_nickname, wx_headimg_url, 
+    wx_gender, wx_country, wx_province, wx_city, wx_language, nickname, username, `password`, 
+    phone_number, identity_number, identity_name, login_ip, last_login_time, area_code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByOpenId" parameterType="java.lang.String" resultType="com.aiden.kpcon.model.User">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where wx_open_id = #{openId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.aiden.kpcon.model.User" useGeneratedKeys="true">
+    insert into user (id,create_time, update_time, wx_open_id,
+      wx_union_id, wx_nickname, wx_headimg_url, 
+      wx_gender, wx_country, wx_province, 
+      wx_city, wx_language, nickname, 
+      username, `password`, phone_number, 
+      identity_number, identity_name, login_ip, 
+      last_login_time, area_code)
+    values (#{id,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{wxOpenId,jdbcType=VARCHAR},
+      #{wxUnionId,jdbcType=VARCHAR}, #{wxNickname,jdbcType=VARCHAR}, #{wxHeadimgUrl,jdbcType=VARCHAR}, 
+      #{wxGender,jdbcType=INTEGER}, #{wxCountry,jdbcType=VARCHAR}, #{wxProvince,jdbcType=VARCHAR},
+      #{wxCity,jdbcType=VARCHAR}, #{wxLanguage,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, 
+      #{identityNumber,jdbcType=VARCHAR}, #{identityName,jdbcType=VARCHAR}, #{loginIp,jdbcType=VARCHAR}, 
+      #{lastLoginTime,jdbcType=TIMESTAMP}, #{areaCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.aiden.kpcon.model.User" useGeneratedKeys="true">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="wxOpenId != null">
+        wx_open_id,
+      </if>
+      <if test="wxUnionId != null">
+        wx_union_id,
+      </if>
+      <if test="wxNickname != null">
+        wx_nickname,
+      </if>
+      <if test="wxHeadimgUrl != null">
+        wx_headimg_url,
+      </if>
+      <if test="wxGender != null">
+        wx_gender,
+      </if>
+      <if test="wxCountry != null">
+        wx_country,
+      </if>
+      <if test="wxProvince != null">
+        wx_province,
+      </if>
+      <if test="wxCity != null">
+        wx_city,
+      </if>
+      <if test="wxLanguage != null">
+        wx_language,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        `password`,
+      </if>
+      <if test="phoneNumber != null">
+        phone_number,
+      </if>
+      <if test="identityNumber != null">
+        identity_number,
+      </if>
+      <if test="identityName != null">
+        identity_name,
+      </if>
+      <if test="loginIp != null">
+        login_ip,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time,
+      </if>
+      <if test="areaCode != null">
+        area_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wxOpenId != null">
+        #{wxOpenId,jdbcType=VARCHAR},
+      </if>
+      <if test="wxUnionId != null">
+        #{wxUnionId,jdbcType=VARCHAR},
+      </if>
+      <if test="wxNickname != null">
+        #{wxNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="wxHeadimgUrl != null">
+        #{wxHeadimgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="wxGender != null">
+        #{wxGender,jdbcType=INTEGER},
+      </if>
+      <if test="wxCountry != null">
+        #{wxCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="wxProvince != null">
+        #{wxProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="wxCity != null">
+        #{wxCity,jdbcType=VARCHAR},
+      </if>
+      <if test="wxLanguage != null">
+        #{wxLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null">
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="identityNumber != null">
+        #{identityNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="identityName != null">
+        #{identityName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginIp != null">
+        #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="areaCode != null">
+        #{areaCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.aiden.kpcon.model.User">
+    update user
+    <set>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wxUnionId != null">
+        wx_union_id = #{wxUnionId,jdbcType=VARCHAR},
+      </if>
+      <if test="wxNickname != null">
+        wx_nickname = #{wxNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="wxHeadimgUrl != null">
+        wx_headimg_url = #{wxHeadimgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="wxGender != null">
+        wx_gender = #{wxGender,jdbcType=INTEGER},
+      </if>
+      <if test="wxCountry != null">
+        wx_country = #{wxCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="wxProvince != null">
+        wx_province = #{wxProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="wxCity != null">
+        wx_city = #{wxCity,jdbcType=VARCHAR},
+      </if>
+      <if test="wxLanguage != null">
+        wx_language = #{wxLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        `password` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null">
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="identityNumber != null">
+        identity_number = #{identityNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="identityName != null">
+        identity_name = #{identityName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginIp != null">
+        login_ip = #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="areaCode != null">
+        area_code = #{areaCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.aiden.kpcon.model.User">
+    update user
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      wx_open_id = #{wxOpenId,jdbcType=VARCHAR},
+      wx_union_id = #{wxUnionId,jdbcType=VARCHAR},
+      wx_nickname = #{wxNickname,jdbcType=VARCHAR},
+      wx_headimg_url = #{wxHeadimgUrl,jdbcType=VARCHAR},
+      wx_gender = #{wxGender,jdbcType=INTEGER},
+      wx_country = #{wxCountry,jdbcType=VARCHAR},
+      wx_province = #{wxProvince,jdbcType=VARCHAR},
+      wx_city = #{wxCity,jdbcType=VARCHAR},
+      wx_language = #{wxLanguage,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      identity_number = #{identityNumber,jdbcType=VARCHAR},
+      identity_name = #{identityName,jdbcType=VARCHAR},
+      login_ip = #{loginIp,jdbcType=VARCHAR},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      area_code = #{areaCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
